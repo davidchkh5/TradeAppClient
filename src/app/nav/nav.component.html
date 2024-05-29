@@ -13,7 +13,7 @@
           </li>
         </ul>
 
-          <form class="d-flex" role="search" #loginForm="ngForm" (ngSubmit)="login()" *ngIf="!(accountService.currentUser$ | async)">
+          <form class="d-flex"  #loginForm="ngForm" (ngSubmit)="login()" *ngIf="!(accountService.currentUser$ | async)">
 
             <input type="text" name="username" id="username" [(ngModel)]="model.username" required placeholder="Username" class="form-control me-4">
             <input type="password" name="password" id="password" [(ngModel)]="model.password" required placeholder="Password" class="form-control me-3">
@@ -23,7 +23,7 @@
         
           <button *ngIf="(accountService.currentUser$ | async)" (click)="logOut()" class="btn btn-danger">Logout</button>
       
-   
+
     
     </div>
   </nav>

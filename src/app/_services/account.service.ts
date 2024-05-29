@@ -40,8 +40,21 @@ currentUser$ = this.currentUserSource.asObservable();
 
   setCurrentUser(user: User){
     const roles = this.decodeToken(user.token).role;
-    Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
+    if(user.role == undefined) user.role = [];
+    Array.isArray(roles) ? user.role = roles : user.role.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
+  }
+
+
+  registerUser(model: any){
+    return this.http.post<User>(this.baseApiUrl+'account/register', model).pipe(
+      map((result:User) => {
+        const user = result;
+        if(user){
+          this.setCurrentUser(user);
+        }
+      })
+    )
   }
 }

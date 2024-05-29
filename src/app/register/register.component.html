@@ -1,0 +1,93 @@
+<div class="register-container">
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="register()" class="form-control">
+    
+    <div class="form-group">
+      <label for="gender">Gender:</label>
+      <select id="gender" formControlName="gender" class="form-control">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input id="username" formControlName="username" type="text" class="form-control">
+      <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+        *Username is required.
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="knownAs">Known As:</label>
+      <input id="knownAs" formControlName="knownAs" type="text" class="form-control">
+      <div *ngIf="registerForm.get('knownAs')?.invalid && registerForm.get('knownAs')?.touched">
+        *Known As is required.
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input id="password" formControlName="password" type="password" class="form-control">
+      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+        <div *ngIf="registerForm.get('password')?.errors?.['required']">
+          *Password is required.
+        </div>
+        <div *ngIf="registerForm.get('password')?.errors?.['minlength']">
+          *Password must be at least 4 characters long.
+        </div>
+        <div *ngIf="registerForm.get('password')?.errors?.['maxlength']">
+          *Password cannot be more than 8 characters long.
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="city">City:</label>
+      <input id="city" formControlName="city" type="text" class="form-control">
+      <div *ngIf="registerForm.get('city')?.invalid && registerForm.get('city')?.touched">
+        *City is required.
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="country">Country:</label>
+      <input id="country" formControlName="country" type="text" class="form-control">
+      <div *ngIf="registerForm.get('country')?.invalid && registerForm.get('country')?.touched">
+        *Country is required.
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <input id="address" formControlName="address" type="text" class="form-control">
+      <div *ngIf="registerForm.get('address')?.invalid && registerForm.get('address')?.touched">
+        *Address is required.
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number:</label>
+      <input id="phoneNumber" formControlName="phoneNumber" type="text" class="form-control">
+      <div *ngIf="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched">
+        *Phone Number is required.
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" class="form-control">
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+        <div *ngIf="registerForm.get('email')?.errors?.['required']">
+          *Email is required.
+        </div>
+        <div *ngIf="registerForm.get('email')?.errors?.['email']">
+          *Invalid email address.
+        </div>
+      </div>
+    </div>
+    
+    <button type="submit" [disabled]="registerForm.invalid" class="form-control">Register</button>
+    <button class="btn btn-danger mt-2" type="button" (click)="cancel()">Cancel</button>
+  </form>
+</div>

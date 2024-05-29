@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AccountService } from '../_services/account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -10,7 +11,7 @@ export class NavComponent {
 
   model: any = {};
 
-  constructor(public accountService: AccountService){}
+  constructor(public accountService: AccountService, private toastrService: ToastrService){}
 
   login(){
     console.log(this.model);
@@ -19,7 +20,8 @@ export class NavComponent {
         console.log("login successful", response);
       },
       error => {
-        console.log("login failed", error);
+        console.log(error);
+        this.toastrService.error(error);
       }
     );
   }
@@ -27,6 +29,7 @@ export class NavComponent {
   logOut(){
     this.accountService.logout();
     this.model = {};
+    window.location.reload();
   }
 
 
