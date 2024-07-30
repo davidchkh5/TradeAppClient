@@ -3,7 +3,7 @@
       <a class="navbar-brand" href="#">Trade-Things</a>
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" routerLink="home">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
@@ -13,16 +13,34 @@
           </li>
         </ul>
 
-          <form class="d-flex"  #loginForm="ngForm" (ngSubmit)="login()" *ngIf="!(accountService.currentUser$ | async)">
+          <form class="d-flex"  #loginForm="ngForm" (ngSubmit)="login()" *ngIf="!accountService.currentUser()">
 
             <input type="text" name="username" id="username" [(ngModel)]="model.username" required placeholder="Username" class="form-control me-4">
             <input type="password" name="password" id="password" [(ngModel)]="model.password" required placeholder="Password" class="form-control me-3">
             <button class="btn btn-success" type="submit">Login</button>
           </form>
-  
-        
-          <button *ngIf="(accountService.currentUser$ | async)" (click)="logOut()" class="btn btn-danger">Logout</button>
-      
+
+
+          <div class="mt-3 ms-4" *ngIf="accountService.currentUser()">
+      <div class="btn-group" dropdown>
+            <button id="button-animated" dropdownToggle type="button" class="btn btn-link dropdown-toggle dd-button"
+                    aria-controls="dropdown-animated">
+                    <p class="dd-buttontxt">
+                      Welcome {{toCamelCase(accountService.currentUser()?.userName)}}
+                    </p>
+                    
+          
+            </button>
+            <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu"
+                role="menu" aria-labelledby="button-animated">
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/profile', this.accountService.currentUser()?.userName]">Profile</a></li>
+              <li role="menuitem"><a class="dropdown-item" >Another action</a>
+              </li>
+              <li role="menuitem"><a class="dropdown-item" (click)="logOut()">Logout</a></li>
+            </ul>
+          </div>
+
+          </div>
 
     
     </div>

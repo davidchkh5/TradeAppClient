@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -10,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class NavComponent {
 
   model: any = {};
+  currentUserName = "";
+  router = inject(Router);
 
   constructor(public accountService: AccountService, private toastrService: ToastrService){}
 
@@ -18,18 +22,32 @@ export class NavComponent {
     this.accountService.login(this.model).subscribe(
       response => {
         console.log("login successful", response);
+        
       },
-      error => {
-        console.log(error);
-        this.toastrService.error(error);
+      (error : HttpErrorResponse) => {
+       if(error.status === 401){
+        this.toastrService.error("Unauthorized: Incorrect username or password.");
+       }else {
+        this.toastrService.error("An unexpected error occurred.");
+       }
       }
     );
   }
 
   logOut(){
+    
     this.accountService.logout();
     this.model = {};
-    window.location.reload();
+    // window.location.reload();
+    this.router.navigate(['/']); 
+  }
+
+
+  toCamelCase(name: string | null | undefined): string | null{
+    if(!name) return null;
+
+    return name.charAt(0).toUpperCase() + name.substring(1, (name.trim().length) );
+
   }
 
 

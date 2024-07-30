@@ -1,0 +1,37 @@
+/* Ensure the dropdown arrow and paragraph are on the same level */
+.dd-btn {
+    display: flex;
+    align-items: center;
+    color: aliceblue;
+    border: none;
+    
+  }
+  
+  .dd-buttontxt {
+    margin: 0;
+    
+  }
+  
+  /* Change the color of the arrow and paragraph to grey when hovered over */
+  .dd-btn:hover,
+  .dd-btn:hover .dd-buttontxt {
+    color: grey;
+  }
+  
+  /* Optional: Remove the underline from the button */
+  .dd-btn {
+    text-decoration: none;
+  }
+
+  .btn-link {
+    text-decoration: none;
+    color: aliceblue;
+  }
+
+  .btn-link :hover, .dropdown-toggle:hover {
+    color: rgb(223, 211, 211);
+  }
+  
+  .dropdown-item {
+    cursor: pointer;
+  }

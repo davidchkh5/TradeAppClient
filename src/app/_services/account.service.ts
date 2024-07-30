@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { User } from '../_models/user';
@@ -9,8 +9,9 @@ import { User } from '../_models/user';
 })
 export class AccountService {
 baseApiUrl = environment.apiUrl;
-private currentUserSource = new BehaviorSubject<User | null>(null);
-currentUser$ = this.currentUserSource.asObservable();
+//private currentUserSource = new BehaviorSubject<User | null>(null);
+ currentUser = signal<User | null>(null);
+//currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -28,7 +29,8 @@ currentUser$ = this.currentUserSource.asObservable();
 
   logout(){
     localStorage.removeItem('user');
-    this.currentUserSource.next(null);
+    this.currentUser.set(null);
+    
   }
   decodeToken(token:string){
     console.log("Token : " + token);
@@ -43,7 +45,7 @@ currentUser$ = this.currentUserSource.asObservable();
     if(user.role == undefined) user.role = [];
     Array.isArray(roles) ? user.role = roles : user.role.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
-    this.currentUserSource.next(user);
+    this.currentUser.set(user);
   }
 
 
