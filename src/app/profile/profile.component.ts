@@ -3,6 +3,7 @@ import { MemberService } from '../_services/member.service';
 import { ActivatedRoute } from '@angular/router';
 import { Member } from '../_models/member';
 import { ToastrService } from 'ngx-toastr';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -11,12 +12,23 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProfileComponent implements OnInit {
   
-  userName: string | null | undefined;
-  memberService = inject(MemberService);
-  member : Member | undefined;
   route = inject(ActivatedRoute);
   toastr = inject(ToastrService);
+  memberService = inject(MemberService);
+  userName: string | null | undefined;
+  member : Member | undefined;
+  form: FormGroup;
+  editable:boolean  = true;
 
+  constructor() {
+    
+
+    this.form = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+    });
+
+  }
   
   ngOnInit() : void {
     
@@ -25,6 +37,10 @@ export class ProfileComponent implements OnInit {
     });
     if(this.userName){
       this.getMember(this.userName);
+
+      if(this.userName == this.getUsernameFromLS()){
+        this.editable = true;
+      }
     }
     
 
@@ -46,5 +62,16 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+  getUsernameFromLS() : string | null {
+
+    const userDataStr = localStorage.getItem('user');
+    if(userDataStr){
+      const userData = JSON.parse(userDataStr);
+      return userData.userName;
+    }else {
+      return null;
+    }
+
+  }
 
 }

@@ -1,1 +1,10 @@
-<p>{{member?.userName}}</p>
+<form [formGroup]="form">
+    
+<app-edit-input 
+label="Username" 
+type="text" 
+[editAble]="editable"
+[formGroup]="form">
+</app-edit-input>
+
+</form>
