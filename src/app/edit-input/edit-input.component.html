@@ -1,4 +1,8 @@
 <div class="form-group" [formGroup]="formGroup">
-    <label for="{{label}}">Username:</label>      
-    <input [id]="label" [formControlName]="label" [type]="type" class="form-control" [readonly]="!editAble" >
+    <label for="{{label}}">{{label}}:</label>      
+    <input [id]="name" [formControlName]="name" [type]="type" class="form-control" [readonly]="!editAble" [value]="value" >
+    <div *ngIf="formGroup.get(name)?.invalid && formGroup.get(name)?.touched">
+        *{{label}} is required.
+      </div>
 </div>
+  

@@ -24,10 +24,12 @@ export class ProfileComponent implements OnInit {
     
 
     this.form = new FormGroup({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      knownAs: new FormControl('', Validators.required),
+      country: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required),
+      phoneNumber: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required)
     });
-
   }
   
   ngOnInit() : void {
@@ -43,7 +45,6 @@ export class ProfileComponent implements OnInit {
       }
     }
     
-
     
   }
   
@@ -54,6 +55,18 @@ export class ProfileComponent implements OnInit {
       (result: Member) => {
         console.log(result);
         this.member = result;
+
+        this.form.patchValue({              
+          knownAs: this.member.knownAs,
+          country: this.member.country,
+          city: this.member.city,
+          phoneNumber: this.member.phoneNumber,
+          email: this.member.email
+        });
+
+        console.log(this.form.value)
+
+
       },
       (error) => {
         this.toastr.error(error);
@@ -73,5 +86,17 @@ export class ProfileComponent implements OnInit {
     }
 
   }
+  
+  updateUser(){
 
+    console.log(this.form.value);
+    this.memberService.updateUser(this.form.value).subscribe(
+      () => {
+        this.toastr.success("Profile updated successfully")
+      },
+      error => {
+        this.toastr.error(error);
+      }
+    )
+  }
 }

@@ -19,4 +19,9 @@ export class MemberService {
     return this.http.get<Member>(this.baseApiUrl+'Users/'+userName);
   }
 
+
+  updateUser(model: any){
+   return this.http.put(this.baseApiUrl+'Users/update', model);
+  }
+
 }

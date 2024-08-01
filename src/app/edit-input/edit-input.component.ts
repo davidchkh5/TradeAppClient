@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,13 +6,29 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './edit-input.component.html',
   styleUrls: ['./edit-input.component.css']
 })
-export class EditInputComponent {
+export class EditInputComponent implements OnInit{
 
   @Input() label: string = '';
+  @Input() name: string = '';
   @Input() type: string = 'text';
   @Input() editAble: boolean = true;
   @Input() formGroup!: FormGroup;
+  @Input() value: string = '';
+  fb = inject(FormBuilder);
 
+
+  ngOnInit(): void {
+    
+    if (!this.formGroup) {
+      console.error('formGroup input is required');
+      return;
+    }
+
+
+    if (!this.formGroup.get(this.name)) {
+      this.formGroup.addControl(this.name, this.fb.control('')); // Added this block
+    }
+  }
 
   // editForm: FormGroup;
   // fb = inject(FormBuilder);
