@@ -7,7 +7,8 @@ import { AppRoutingModule } from '../app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { TabsModule } from 'ngx-bootstrap/tabs'
+import { MatCard, MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [],
@@ -22,7 +23,10 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
+    MatCardModule
+
   ],
 
   exports: [
@@ -34,7 +38,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     HttpClientModule,
     ReactiveFormsModule,
     ToastrModule,
-    BsDropdownModule
+    BsDropdownModule,
+    TabsModule,
+    MatCardModule
   ],
 })
 export class SharedModule { }

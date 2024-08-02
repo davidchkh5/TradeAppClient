@@ -10,6 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { EditInputComponent } from './edit-input/edit-input.component';
+import { OffersComponent } from './offers/offers.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { EditInputComponent } from './edit-input/edit-input.component';
     HomeComponent,
     ItemsComponent,
     ProfileComponent,
-    EditInputComponent
+    EditInputComponent,
+    OffersComponent
   ],
   imports: [
     SharedModule

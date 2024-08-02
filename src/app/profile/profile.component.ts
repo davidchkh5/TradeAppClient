@@ -13,16 +13,18 @@ import { UpdateMember } from '../_models/updatemember';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  
+  //Injection
   route = inject(ActivatedRoute);
   toastr = inject(ToastrService);
   memberService = inject(MemberService);
+  
+//Initialization
   userName: string | null | undefined;
   member : UpdateMember | undefined;
   form: FormGroup;
   editable:boolean  = true;
   isSubmitted: boolean = false;
-  tmpFormgroup = new FormGroup([]);
+
   constructor() {
     
 
@@ -51,7 +53,7 @@ export class ProfileComponent implements OnInit {
 
     this.form.valueChanges.subscribe((result) =>{
 
-      console.log(this.tmpFormgroup);
+ 
     //Here i want to check if tmpgroup is empty or it has some formcontrol elements
       
     if(isEqual(result,this.member)){
@@ -61,7 +63,7 @@ export class ProfileComponent implements OnInit {
       this.isSubmitted = false;
     }
 
-      this.tmpFormgroup = result;
+ 
       // if(this.isSubmitted){
       //   this.isSubmitted = false;
       // }

@@ -1,3 +1,5 @@
+<tabset>
+  <tab heading="Edit profile" id="tab1">
 <form [formGroup]="form" (ngSubmit)="updateUser()">
     <app-edit-input 
       label="KnownAs" 
@@ -40,7 +42,11 @@ name="email"
 </app-edit-input>
 
 <button type="submit" [disabled]="form.invalid || isSubmitted" class="form-control btn btn-success">Update</button>
+</form>
+</tab>
 
-  </form>
+  <tab heading="Offers" id="tab2"><app-offers></app-offers></tab>
+</tabset>
+
 
   
