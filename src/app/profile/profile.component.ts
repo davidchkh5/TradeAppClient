@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Member } from '../_models/member';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { isEqual } from 'lodash';
+import { UpdateMember } from '../_models/updatemember';
 
 @Component({
   selector: 'app-profile',
@@ -16,10 +18,11 @@ export class ProfileComponent implements OnInit {
   toastr = inject(ToastrService);
   memberService = inject(MemberService);
   userName: string | null | undefined;
-  member : Member | undefined;
+  member : UpdateMember | undefined;
   form: FormGroup;
   editable:boolean  = true;
-
+  isSubmitted: boolean = false;
+  tmpFormgroup = new FormGroup([]);
   constructor() {
     
 
@@ -33,7 +36,8 @@ export class ProfileComponent implements OnInit {
   }
   
   ngOnInit() : void {
-    
+    this.isSubmitted = true;
+
     this.route.paramMap.subscribe(params => {
       this.userName = params.get('userName');
     });
@@ -44,6 +48,25 @@ export class ProfileComponent implements OnInit {
         this.editable = true;
       }
     }
+
+    this.form.valueChanges.subscribe((result) =>{
+
+      console.log(this.tmpFormgroup);
+    //Here i want to check if tmpgroup is empty or it has some formcontrol elements
+      
+    if(isEqual(result,this.member)){
+      this.isSubmitted = true;
+
+    }else{
+      this.isSubmitted = false;
+    }
+
+      this.tmpFormgroup = result;
+      // if(this.isSubmitted){
+      //   this.isSubmitted = false;
+      // }
+      
+    })
     
     
   }
@@ -53,8 +76,7 @@ export class ProfileComponent implements OnInit {
   getMember(username:string) {
     this.memberService.getMember(username).subscribe(
       (result: Member) => {
-        console.log(result);
-        this.member = result;
+        this.member = this.mapToUpdateMember(result);
 
         this.form.patchValue({              
           knownAs: this.member.knownAs,
@@ -65,8 +87,6 @@ export class ProfileComponent implements OnInit {
         });
 
         console.log(this.form.value)
-
-
       },
       (error) => {
         this.toastr.error(error);
@@ -87,12 +107,23 @@ export class ProfileComponent implements OnInit {
 
   }
   
+   mapToUpdateMember(data: Member): UpdateMember {
+    return {
+      city: data.city,
+      country: data.country,
+      email: data.email,
+      knownAs: data.knownAs,
+      phoneNumber: data.phoneNumber
+    };
+  }
+
   updateUser(){
 
-    console.log(this.form.value);
     this.memberService.updateUser(this.form.value).subscribe(
       () => {
-        this.toastr.success("Profile updated successfully")
+        this.toastr.success("Profile updated successfully");
+        this.isSubmitted = true;
+        
       },
       error => {
         this.toastr.error(error);

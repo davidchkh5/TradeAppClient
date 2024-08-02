@@ -39,7 +39,8 @@ name="email"
 [formGroup]="form">
 </app-edit-input>
 
-<button type="submit" [disabled]="form.invalid || form.pristine" class="form-control btn btn-success">Update</button>
+<button type="submit" [disabled]="form.invalid || isSubmitted" class="form-control btn btn-success">Update</button>
 
   </form>
+
   
