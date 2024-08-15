@@ -1,21 +1,43 @@
 <h1 mat-dialog-title>Add Item</h1>
 <div mat-dialog-content>
   <form [formGroup]="form">
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Item Name</mat-label>
       <input matInput formControlName="name" />
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field appearance="fill">
       <mat-label>Description</mat-label>
-      <input matInput formControlName="description" />
+      <textarea matInput formControlName="description" style="resize: none;"></textarea>
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>Trade For</mat-label>
-        <input matInput formControlName="tradeFor" />
-      </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Trade For</mat-label>
+      <input matInput formControlName="tradeFor" />
+    </mat-form-field>
+
+    <!-- File input field (outside mat-form-field) -->
+    <div class="file-input-container">
+      <label for="fileInput">Choose files</label>
+      <input type="file" (change)="onFileChange($event)" multiple class="file-input-field" />
+
+    </div>
+
+    <!-- Display selected files -->
+    <div *ngIf="selectedFiles.length > 0">
+      <p>Selected Files:</p>
+      <ul>
+        <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
+      </ul>
+    </div>
+
+    <!-- Clear Files Button -->
+    <button type="button" (click)="clearFiles()" class="btn btn-warning">Clear Files</button>
+ 
+
   </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()" class="btn btn-danger ms-1">Cancel</button>
-  <button mat-button [mat-dialog-close]="form!.value" [disabled]="form!.invalid" class="btn btn-success ms-4">Add</button>
+  <button mat-button [mat-dialog-close]="form!.value" [disabled]="form!.invalid" class="btn btn-success ms-4" (click)="onSubmit()">Add</button>
 </div>

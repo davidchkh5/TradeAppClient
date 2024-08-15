@@ -16,8 +16,8 @@ export class ItemService {
     return this.http.get<Item[]>(this.baseApiUrl+'Items/personal');
   }
 
-  addItems(){
-
+  addItems(formData: FormData){
+    return this.http.post<string>(this.baseApiUrl+'Items/add', formData, {responseType: 'text' as 'json'});
   }
 
   deleteItems(id: number) {
