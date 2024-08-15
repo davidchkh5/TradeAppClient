@@ -8,7 +8,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs'
-import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [],
@@ -25,7 +29,11 @@ import { MatCard, MatCardModule } from '@angular/material/card';
     }),
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule
 
   ],
 
@@ -40,7 +48,11 @@ import { MatCard, MatCardModule } from '@angular/material/card';
     ToastrModule,
     BsDropdownModule,
     TabsModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule
   ],
 })
 export class SharedModule { }

@@ -1,4 +1,4 @@
-export interface Offers {
+export interface Offer {
     id: number;
     itemId: number,
     posterUsername: string;

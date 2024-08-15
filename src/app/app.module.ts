@@ -11,6 +11,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { EditInputComponent } from './edit-input/edit-input.component';
 import { OffersComponent } from './offers/offers.component';
+import { AddItemsComponent } from './add-items/add-items.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { UpdateUserComponent } from './update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { OffersComponent } from './offers/offers.component';
     ItemsComponent,
     ProfileComponent,
     EditInputComponent,
-    OffersComponent
+    OffersComponent,
+    AddItemsComponent,
+    ConfirmDialogComponent,
+    UpdateUserComponent
   ],
   imports: [
     SharedModule

@@ -1,52 +1,17 @@
 <tabset>
-  <tab heading="Edit profile" id="tab1">
-<form [formGroup]="form" (ngSubmit)="updateUser()">
-    <app-edit-input 
-      label="KnownAs" 
-      type="text" 
-      name="knownAs"
-      [editAble]="editable"
-      [formGroup]="form">
-    </app-edit-input>
-
-    <app-edit-input 
-      label="Country" 
-      type="text" 
-      name="country"
-      [editAble]="editable"
-      [formGroup]="form">
-    </app-edit-input>
-  
-    <app-edit-input 
-    label="City" 
-    type="text" 
-    name="city"
-    [editAble]="editable"
-    [formGroup]="form">
-  </app-edit-input>
-
-  <app-edit-input 
-  label="Phone Number" 
-  type="text" 
-  name="phoneNumber"
-  [editAble]="editable"
-  [formGroup]="form">
-</app-edit-input>
-
-<app-edit-input 
-label="Email" 
-type="text" 
-name="email"
-[editAble]="editable"
-[formGroup]="form">
-</app-edit-input>
-
-<button type="submit" [disabled]="form.invalid || isSubmitted" class="form-control btn btn-success">Update</button>
-</form>
-</tab>
-<tab heading="Items" id="tab2"></tab>
-  <tab heading="Offers" id="tabe"><app-offers></app-offers></tab>
+  <tab heading="Edit profile" id="tab1" (selectTab)="navigateTo('update')" [active]="activeTab === 'update'">
+    <ng-container *ngIf="activeTab === 'update'">
+      <app-update-user></app-update-user>
+    </ng-container>
+  </tab>
+  <tab heading="Items" id="tab2" (selectTab)="navigateTo('items')" [active]="activeTab === 'items'">
+    <ng-container *ngIf="activeTab === 'items'">
+      <app-items></app-items>
+    </ng-container>
+  </tab>
+  <tab heading="Offers" id="tab3" (selectTab)="navigateTo('offers')" [active]="activeTab === 'offers'">
+    <ng-container *ngIf="activeTab === 'offers'">
+      <app-offers></app-offers>
+    </ng-container>
+  </tab>
 </tabset>
-
-
-  

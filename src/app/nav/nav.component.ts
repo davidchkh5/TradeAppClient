@@ -3,6 +3,7 @@ import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-nav',
@@ -14,6 +15,7 @@ export class NavComponent {
   model: any = {};
   currentUserName = "";
   router = inject(Router);
+  dialog = inject(MatDialog);
 
   constructor(public accountService: AccountService, private toastrService: ToastrService){}
 
@@ -38,8 +40,10 @@ export class NavComponent {
     
     this.accountService.logout();
     this.model = {};
+    this.dialog.closeAll();
     // window.location.reload();
     this.router.navigate(['/']); 
+    
   }
 
 

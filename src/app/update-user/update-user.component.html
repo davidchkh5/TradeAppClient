@@ -1,0 +1,43 @@
+<form [formGroup]="form" (ngSubmit)="updateUser()">
+    <app-edit-input 
+      label="KnownAs" 
+      type="text" 
+      name="knownAs"
+      [editAble]="editable"
+      [formGroup]="form">
+    </app-edit-input>
+
+    <app-edit-input 
+      label="Country" 
+      type="text" 
+      name="country"
+      [editAble]="editable"
+      [formGroup]="form">
+    </app-edit-input>
+  
+    <app-edit-input 
+    label="City" 
+    type="text" 
+    name="city"
+    [editAble]="editable"
+    [formGroup]="form">
+  </app-edit-input>
+
+  <app-edit-input 
+  label="Phone Number" 
+  type="text" 
+  name="phoneNumber"
+  [editAble]="editable"
+  [formGroup]="form">
+</app-edit-input>
+
+<app-edit-input 
+label="Email" 
+type="text" 
+name="email"
+[editAble]="editable"
+[formGroup]="form">
+</app-edit-input>
+
+<button type="submit" [disabled]="form.invalid || isSubmitted" class="form-control btn btn-success">Update</button>
+</form>

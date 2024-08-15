@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { OffersService } from '../_services/offers.service';
-import { Offers } from '../_models/offers';
+import { Offer } from '../_models/offer';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -11,21 +11,22 @@ import { ToastrService } from 'ngx-toastr';
 export class OffersComponent implements OnInit {
   offersService = inject(OffersService);
   toastr = inject(ToastrService);
-  offers: Offers[] | undefined;
+  offers: Offer[] | undefined;
 
 
   ngOnInit(): void {
     this.getOffers();
 
     console.log(this.offers);
+
+    
   }
 
 
 
   getOffers(){
-    this.offersService.getOffers().subscribe((result : Offers[]) => {
+    this.offersService.getOffers().subscribe((result : Offer[]) => {
       this.offers = result;
-      console.log(this.offers);
     },
     (error) => {
       this.toastr.error(error);
