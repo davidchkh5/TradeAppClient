@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [],
@@ -33,7 +34,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    NgxSpinnerModule.forRoot({
+      type: 'line-scale-party'
+    })
 
   ],
 
@@ -52,7 +56,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    NgxSpinnerModule
   ],
 })
 export class SharedModule { }

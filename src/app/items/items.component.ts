@@ -20,6 +20,7 @@ dialog = inject(MatDialog);
 
 
 items: Item[] | undefined; 
+newItem: Item | undefined;
 
 
 ngOnInit(): void {
@@ -77,14 +78,17 @@ openDialog() {
     width: '250px'
   });
 
+
   dialogRef.afterClosed().subscribe( result => {
-    if(result){
-      console.log("result Data:");
-      console.log(result);
-    }
-  })
-}
+    if(result){    
+  dialogRef.componentInstance.addedITem.subscribe((item:any) => {
 
+    this.items?.push(JSON.parse(item));
 
+      })
+
+      }
+    })
+  }
 
 }

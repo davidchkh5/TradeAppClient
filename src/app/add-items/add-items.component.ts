@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ItemService } from '../_services/item.service';
 import { ToastrService } from 'ngx-toastr';
+import { Item } from '../_models/item';
 
 @Component({
   selector: 'app-add-items',
@@ -11,12 +12,15 @@ import { ToastrService } from 'ngx-toastr';
   
 })
 export class AddItemsComponent {
+//IN || OUT
+@Output() addedITem = new EventEmitter<Item>();
 
   //Injection
   fb = inject(FormBuilder);
   dialogRef = inject(MatDialogRef<AddItemsComponent>);
   itemsService = inject(ItemService);
   toastr = inject(ToastrService);
+
   //Initialization
   form : FormGroup;
   selectedFiles: File[] = [];
@@ -54,10 +58,16 @@ export class AddItemsComponent {
       formData.append('files', file, file.name);
     });
 
-    console.log("FormData");
-    console.log(formData);
-    this.itemsService.addItems(formData).subscribe(() => {
-      console.log("successfully added");
+    console.log(this.selectedFiles[0].stream);
+
+
+
+
+    this.itemsService.addItems(formData).subscribe((result : Item) => {
+
+      this.addedITem.emit(result);
+
+       
       this.toastr.success("Added successfully");
       
     },

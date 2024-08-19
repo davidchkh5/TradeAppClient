@@ -17,7 +17,7 @@ export class ItemService {
   }
 
   addItems(formData: FormData){
-    return this.http.post<string>(this.baseApiUrl+'Items/add', formData, {responseType: 'text' as 'json'});
+    return this.http.post<Item>(this.baseApiUrl+'Items/add', formData, {responseType: 'text' as 'json'});
   }
 
   deleteItems(id: number) {

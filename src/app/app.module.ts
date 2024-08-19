@@ -14,6 +14,7 @@ import { OffersComponent } from './offers/offers.component';
 import { AddItemsComponent } from './add-items/add-items.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { LoadingInterceptor } from './loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     SharedModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true}
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
