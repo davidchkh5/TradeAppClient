@@ -1,4 +1,32 @@
 textarea {
-    resize: none;
+  resize: none;
 }
 
+.file-drop {
+  border: 2px dashed #007bff;
+  border-radius: 4px;
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  position: relative;
+}
+
+.file-drop-zone {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  position: relative;
+  z-index: 1; /* Ensure the zone is below the text */
+}
+
+.file-drop-zone p {
+  margin: 0;
+  font-size: 16px;
+  color: #007bff;
+  z-index: 2; /* Ensure text is on top */
+  position: absolute; /* Place text on top of everything */
+}

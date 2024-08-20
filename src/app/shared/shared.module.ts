@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 @NgModule({
   declarations: [],
@@ -37,7 +38,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatIconModule,
     NgxSpinnerModule.forRoot({
       type: 'line-scale-party'
-    })
+    }),
+    NgxFileDropModule
+
 
   ],
 
@@ -57,7 +60,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxFileDropModule
   ],
 })
 export class SharedModule { }

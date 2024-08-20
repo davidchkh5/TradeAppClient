@@ -1,3 +1,56 @@
+<!-- <h1 mat-dialog-title>Add Item</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Item Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" style="resize: none;"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Trade For</mat-label>
+      <input matInput formControlName="tradeFor" />
+    </mat-form-field>
+
+
+    <div class="file-drop">
+      <ngx-file-drop (onFileDrop)="onFileDrop($event)" (onFileOver)="onFileOver($event)" (onFileLeave)="onFileLeave($event)">
+        <div class="file-drop-zone">
+          <p>Drag and drop files here or click to upload</p>
+        </div>
+      </ngx-file-drop>
+    </div>
+
+     <div class="file-input-container">
+      <label for="fileInput">Choose files</label>
+      <input type="file" (change)="onFileChange($event)" multiple class="file-input-field" />
+
+    </div> 
+
+
+    <div *ngIf="selectedFiles.length > 0">
+      <p>Selected Files:</p>
+      <ul>
+        <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
+      </ul>
+    </div>
+
+    <button type="button" (click)="clearFiles()" class="btn btn-warning mt-2">Clear Files</button>
+ 
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()" class="btn btn-danger ms-1">Cancel</button>
+  <button mat-button [mat-dialog-close]="form!.value" [disabled]="form!.invalid" class="btn btn-success ms-4" (click)="onSubmit()">Add</button>
+</div> -->
+
+
+
 <h1 mat-dialog-title>Add Item</h1>
 <div mat-dialog-content>
   <form [formGroup]="form">
@@ -16,14 +69,16 @@
       <input matInput formControlName="tradeFor" />
     </mat-form-field>
 
-    <!-- File input field (outside mat-form-field) -->
-    <div class="file-input-container">
-      <label for="fileInput">Choose files</label>
-      <input type="file" (change)="onFileChange($event)" multiple class="file-input-field" />
-
+    <!-- Ngx File Drop for drag and drop functionality -->
+     
+    <div class="file-drop" (click)="triggerFileInput()">
+      <ngx-file-drop (onFileDrop)="onFileDrop($event)" (onFileOver)="onFileOver($event)" (onFileLeave)="onFileLeave($event)" dropZoneLabel="Drag and drop files here or click to upload">
+      </ngx-file-drop>
     </div>
 
-    <!-- Display selected files -->
+    <!-- Hidden file input for click-to-upload functionality -->
+    <input type="file" id="fileInput" (change)="onFileChange($event)" multiple style="display: none;" accept=".png,.jpg,.img,"/>
+
     <div *ngIf="selectedFiles.length > 0">
       <p>Selected Files:</p>
       <ul>
@@ -31,13 +86,10 @@
       </ul>
     </div>
 
-    <!-- Clear Files Button -->
     <button type="button" (click)="clearFiles()" class="btn btn-warning mt-2">Clear Files</button>
- 
-
   </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()" class="btn btn-danger ms-1">Cancel</button>
-  <button mat-button [mat-dialog-close]="form!.value" [disabled]="form!.invalid" class="btn btn-success ms-4" (click)="onSubmit()">Add</button>
+  <button mat-button [disabled]="form.invalid" class="btn btn-success ms-4" (click)="onSubmit()">Add</button>
 </div>
