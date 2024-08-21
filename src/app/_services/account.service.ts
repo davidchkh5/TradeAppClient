@@ -9,9 +9,9 @@ import { User } from '../_models/user';
 })
 export class AccountService {
 baseApiUrl = environment.apiUrl;
-//private currentUserSource = new BehaviorSubject<User | null>(null);
+
  currentUser = signal<User | null>(null);
-//currentUser$ = this.currentUserSource.asObservable();
+
 
   constructor(private http: HttpClient) { }
 
@@ -28,7 +28,8 @@ baseApiUrl = environment.apiUrl;
 
 
   logout(){
-    localStorage.removeItem('user');
+    localStorage.clear();
+    
     this.currentUser.set(null);
     
   }

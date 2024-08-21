@@ -18,13 +18,23 @@ route = inject(ActivatedRoute);
 
 
 //Initialization
-
+cacheKey : string = 'cacheItem';
 item: Item | undefined;
 
 
 
 
 ngOnInit(): void {
+
+  const itemId = this.getItemId();
+
+  if(itemId == undefined) {
+    this.toastr.error("This item id could not be found")
+  } else {
+    this.loadItemDetail(itemId);
+  }
+
+
 
   if(this.item == undefined){
     const id = this.getItemId();
@@ -40,12 +50,24 @@ ngOnInit(): void {
 
 
 
+loadItemDetail(id: number){
+
+ const cachedItem =  this.getCacheItem(id);
+
+ if(cachedItem != undefined) {
+  this.item = cachedItem;
+ }else {
+  this.getItemById(id);
+ }
+
+}
+
 
 getItemById(id: number){
   this.itemService.getItemById(id).subscribe((result:Item) => {
     if(result){
       this.item = result;
-      console.log(this.item);
+      this.setCacheItem(id, result);
     }
   },
   (error) => {
@@ -61,6 +83,28 @@ getItemId() : number | undefined{
     id = param['id'];
   })
   return id;
+}
+
+
+
+getCacheItem(id: number) : Item | undefined {
+  const itemStr = localStorage.getItem(this.cacheKey+id);
+
+  if(itemStr){
+    var itemObj = JSON.parse(itemStr);
+  } else {
+    return undefined;
+  }
+  return itemObj;
+}
+
+
+
+setCacheItem(id : number, item: Item) {
+
+  localStorage.setItem(this.cacheKey+id, JSON.stringify(item));
+
+
 }
 
 
