@@ -15,6 +15,7 @@ import { AddItemsComponent } from './add-items/add-items.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { LoadingInterceptor } from './loading.interceptor';
+import { ItemDetailsComponent } from './item-details/item-details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoadingInterceptor } from './loading.interceptor';
     OffersComponent,
     AddItemsComponent,
     ConfirmDialogComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    ItemDetailsComponent
   ],
   imports: [
     SharedModule

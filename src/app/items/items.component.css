@@ -64,3 +64,7 @@
   .delete-button mat-icon {
     color: red; /* Change color if needed */
   }
+
+  .item {
+    cursor: pointer;
+  }

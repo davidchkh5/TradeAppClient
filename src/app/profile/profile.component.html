@@ -6,7 +6,7 @@
   </tab>
   <tab heading="Items" id="tab2" (selectTab)="navigateTo('items')" [active]="activeTab === 'items'">
     <ng-container *ngIf="activeTab === 'items'">
-      <app-items></app-items>
+      <router-outlet></router-outlet>
     </ng-container>
   </tab>
   <tab heading="Offers" id="tab3" (selectTab)="navigateTo('offers')" [active]="activeTab === 'offers'">

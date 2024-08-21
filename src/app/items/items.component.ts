@@ -2,9 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ItemService } from '../_services/item.service';
 import { Item } from '../_models/item';
 import { ToastrService } from 'ngx-toastr';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { AddItemsComponent } from '../add-items/add-items.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-items',
@@ -17,6 +18,8 @@ export class ItemsComponent implements OnInit {
 itemsService = inject(ItemService);
 toastr = inject(ToastrService);
 dialog = inject(MatDialog);
+router = inject(Router);
+
 
 
 items: Item[] | undefined; 
@@ -25,8 +28,12 @@ newItem: Item | undefined;
 
 ngOnInit(): void {
   this.getItems();
-
+  
 }
+
+
+
+
 
 
 openDeleteConfirmationDialog(id: number): void {

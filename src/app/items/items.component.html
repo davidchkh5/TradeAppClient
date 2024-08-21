@@ -8,8 +8,11 @@
          <mat-icon>delete</mat-icon>
        </button>
      <mat-card-title>
+      <div class="item" [routerLink]="[item.id]">
         {{item.name}} <br/>
         <img src="{{item.mainPhotoUrl}}" alt="image">
-     </mat-card-title>
+      </div>
+
+     </mat-card-title>  
     </mat-card>
  </div>

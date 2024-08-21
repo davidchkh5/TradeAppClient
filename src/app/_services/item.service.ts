@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Item } from '../_models/item';
 
@@ -8,6 +8,7 @@ import { Item } from '../_models/item';
 })
 export class ItemService {
   baseApiUrl = environment.apiUrl;
+  currentItem = signal<Item | null>(null);
 
   http = inject(HttpClient);
 
@@ -22,6 +23,10 @@ export class ItemService {
 
   deleteItems(id: number) {
     return this.http.delete<string>(this.baseApiUrl+'Items/'+id, {responseType: 'text' as 'json'});
+  }
+
+  getItemById(id: number) {
+    return this.http.get<Item>(this.baseApiUrl + `Items/${id}`, {responseType: 'text' as 'json'});
   }
   
 }
