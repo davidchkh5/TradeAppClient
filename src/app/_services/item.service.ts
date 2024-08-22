@@ -25,8 +25,8 @@ export class ItemService {
     return this.http.delete<string>(this.baseApiUrl+'Items/'+id, {responseType: 'text' as 'json'});
   }
 
-  getItemById(id: number) {
-    return this.http.get<Item>(this.baseApiUrl + `Items/${id}`, {responseType: 'text' as 'json'});
+   getItemById(id: number) {
+    return  this.http.get<Item>(this.baseApiUrl + `Items/${id}`);
   }
   
 }

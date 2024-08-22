@@ -29,22 +29,24 @@ ngOnInit(): void {
   const itemId = this.getItemId();
 
   if(itemId == undefined) {
-    this.toastr.error("This item id could not be found")
+    this.toastr.error("This item id could not be found");
   } else {
     this.loadItemDetail(itemId);
   }
 
 
 
-  if(this.item == undefined){
-    const id = this.getItemId();
-    if(id != undefined){
-      this.getItemById(id);
-    }else {
-      this.toastr.error("This item id could not be found")
-    }
-  }
+  // if(this.item == undefined){
+  //   const id = this.getItemId();
+  //   if(id != undefined){
+  //     this.getItemById(id);
+  //   }else {
+  //     this.toastr.error("This item id could not be found")
+  //   }
+  // }
   
+  console.log("huehuehue");;
+  console.log(this.item);
   
 }
 
@@ -56,23 +58,26 @@ loadItemDetail(id: number){
 
  if(cachedItem != undefined) {
   this.item = cachedItem;
+  console.log("loaded item from cache", this.item);
  }else {
+  console.log("getting item by id");
   this.getItemById(id);
  }
 
 }
 
 
-getItemById(id: number){
-  this.itemService.getItemById(id).subscribe((result:Item) => {
+  getItemById(id: number){
+  ( this.itemService.getItemById(id)).subscribe((result:Item) => {
     if(result){
       this.item = result;
       this.setCacheItem(id, result);
+      console.log("loaded item from api", this.item);
     }
   },
   (error) => {
     this.toastr.error(error);
-  })
+  });
 }
 
 
