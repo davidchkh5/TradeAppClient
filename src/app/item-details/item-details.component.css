@@ -12,6 +12,13 @@
     font-size: 1.2rem;
     margin-right: 8px;
   }
+
+  .comment-box {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
   
 
   

@@ -1,35 +1,44 @@
-<div class="d-flex align-items-center">
-    <button class="btn btn-link" [routerLink]="['..']">
-      <i class="bi bi-arrow-left"></i> Back
-    </button>
-  </div>
+<div class="container">
+  <div class="row">
+    <!-- Back Button -->
+    <div class="d-flex align-items-center mb-3">
+      <button class="btn btn-link" [routerLink]="['..']">
+        <i class="bi bi-arrow-left"></i> Back
+      </button>
+    </div>
 
-  <div class="col-4">
-    <div class="card">
-      <img src="{{item?.mainPhotoUrl || './assets/user.png'}}" alt="{{item?.name}}" class="card-img-top img-thumbnail">
-    <div class="card-body">
-      <div>
-        <strong>Item: </strong>
-        <p>{{item?.name}}</p>
-      </div>
-      <div>
-        <strong>Owner: </strong>
-        <p>{{item?.ownerUsername}}</p>
-      </div>
-      <div>
-        <strong>Description : </strong>
-        <p>{{item?.description}}</p>
-      </div>
-      <div>
-        <strong>Trading For: </strong>
-        <p>{{item?.tradeFor}}</p>
+    <!-- Item Details -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card">
+        <img src="{{item?.mainPhotoUrl || './assets/user.png'}}" alt="{{item?.name}}" class="card-img-top img-thumbnail">
+        <div class="card-body">
+          <div>
+            <strong>Item: </strong>
+            <p>{{item?.name}}</p>
+          </div>
+          <div>
+            <strong>Owner: </strong>
+            <p>{{item?.ownerUsername}}</p>
+          </div>
+          <div>
+            <strong>Description: </strong>
+            <p>{{item?.description}}</p>
+          </div>
+          <div>
+            <strong>Trading For: </strong>
+            <p>{{item?.tradeFor}}</p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="card-footer">
-      <!-- <div class="btn-group d-flex">
-        <button class="btn btn-primary">Like</button>
-        <button class="btn btn-success"(click)="selectTab('Messages')">Messages</button>
-      </div> -->
-    </div>
+
+    <!-- Comments Box -->
+    <div class="col-md-6 col-lg-7">
+      <div *ngIf="item?.offers?.length == 0"> <p><strong>Offers are empty</strong></p></div>
+      <div class="comment-box" *ngFor="let offer of item?.offers ">
+        <p><strong>{{offer.posterUsername}}</strong>  <small>{{offer.created | date: 'short'}}</small></p><br/>
+        <p>{{offer.comment}}</p>
+      </div>
     </div>
   </div>
+</div>
