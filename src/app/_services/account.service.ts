@@ -38,15 +38,27 @@ baseApiUrl = environment.apiUrl;
     const payLoad = token.split(".")[1];
     const decoded = atob(payLoad);
     const returningValue = JSON.parse(decoded);
-    return returningValue ;
+    console.log("tokeen");
+    console.log(returningValue);
+    return returningValue ;   
   }
 
   setCurrentUser(user: User){
+    const exp = this.decodeToken(user.token).exp;
     const roles = this.decodeToken(user.token).role;
-    if(user.role == undefined) user.role = [];
-    Array.isArray(roles) ? user.role = roles : user.role.push(roles);
-    localStorage.setItem('user', JSON.stringify(user));
-    this.currentUser.set(user);
+
+    if(exp == undefined) console.log("Exp is undefined");
+
+    if(this.differenceExpDate(exp) > 0){
+      if(user.role == undefined) user.role = [];
+      Array.isArray(roles) ? user.role = roles : user.role.push(roles);
+      localStorage.setItem('user', JSON.stringify(user));
+      this.currentUser.set(user);
+    } else {
+      this.logout();
+    }
+
+
   }
 
 
@@ -59,5 +71,20 @@ baseApiUrl = environment.apiUrl;
         }
       })
     )
+  }
+
+
+  differenceExpDate(expUnix: string) : number{
+
+    const expInt = parseInt(expUnix);
+
+    const date = new Date(expInt * 1000);
+    const now = new Date();
+    console.log(date);
+
+    const difference = (date.getTime() - now.getTime());
+    
+    
+    return difference;
   }
 }

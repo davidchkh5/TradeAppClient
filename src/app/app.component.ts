@@ -11,9 +11,12 @@ export class AppComponent implements OnInit {
 
   title = 'Trade App';
 
+  
+
   constructor(private accountService: AccountService){}
 
   ngOnInit(): void {
+    
     this.setCurrentUser();
 
   }

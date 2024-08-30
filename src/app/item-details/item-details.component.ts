@@ -45,9 +45,7 @@ ngOnInit(): void {
   //   }
   // }
   
-  console.log("huehuehue");;
-  console.log(this.item);
-  
+
 }
 
 
